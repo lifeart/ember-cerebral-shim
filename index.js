@@ -22,8 +22,9 @@ module.exports = {
   },
   treeForAddon (tree) {
     const app = this._findHost();
-
-    const reduxPath = path.dirname(require.resolve('cerebral/src/index.js'));
+    const repoPath = './cerebral_src/packages/node_modules/';
+    // const reduxPath = path.dirname(require.resolve('cerebral/src/index.js'));
+    const reduxPath = path.dirname(path.resolve(repoPath + 'cerebral/src/index.js'));
     let reduxTree = this.treeGenerator(reduxPath);
 
     // Fix import paths to not include ".js" extension in name
