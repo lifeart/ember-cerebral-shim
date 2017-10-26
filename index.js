@@ -3,6 +3,7 @@
 const path = require('path');
 const mergeTrees = require('broccoli-merge-trees');
 const replace = require('broccoli-replace');
+const Funnel = require('broccoli-funnel');
 module.exports = {
   name: 'cerebral',
   isDevelopingAddon() {
@@ -23,37 +24,23 @@ module.exports = {
   treeForAddon (tree) {
     const app = this._findHost();
     const repoPath = './cerebral_src/packages/node_modules/';
-    // const reduxPath = path.dirname(require.resolve('cerebral/src/index.js'));
     const reduxPath = path.dirname(path.resolve(repoPath + 'cerebral/src/index.js'));
-    let reduxTree = this.treeGenerator(reduxPath);
-
-    // Fix import paths to not include ".js" extension in name
+    let reduxTree = new Funnel(reduxPath,{
+      exclude: ['**/*.test.js']
+    });
     reduxTree = replace(reduxTree, {
-      files: '**/*.js',
+      files: ['**/*.js','**/**/*.js'],
       patterns: [
         {
           match: /process\.env\.NODE_ENV/g,
           replacement: `"${app.env}"`
         },
         {
-          match: /= VERSION;/g,
-          replacement: `="3.4.0";`
-        }
+          match: /VERSION/g,
+          replacement: `"3.4.0"`
+        },
       ]
     });
-
-    // let addon = this.addons.find(addon => addon.name === 'ember-cli-babel');
-
-    // reduxTree = addon.transpileTree(reduxTree, {
-    //   babel: {
-    //     plugins: ['babel-plugin-transform-object-rest-spread']
-    //   },
-    //   'ember-cli-babel': {
-    //     compileModules: false
-    //   }
-    // });
-
-    // console.log('rx tree!');
 
     if (!tree) {
       return this._super.treeForAddon.call(this, reduxTree);
