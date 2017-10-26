@@ -34,6 +34,10 @@ module.exports = {
         {
           match: /process\.env\.NODE_ENV/g,
           replacement: `"${app.env}"`
+        },
+        {
+          match: /= VERSION;/g,
+          replacement: `="3.4.0";`
         }
       ]
     });
