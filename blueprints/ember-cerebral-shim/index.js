@@ -3,6 +3,7 @@ module.exports = {
   afterInstall: function () {
     return this.addPackagesToProject([
       {name: 'cerebral', target: '^3.4.0'},
+      {name: 'broccoli-replace', target: '*'},
       {name: 'download-git-repo', target: '^1.0.1'}
     ]).then(() => {
       return this.addAddonsToProject({
