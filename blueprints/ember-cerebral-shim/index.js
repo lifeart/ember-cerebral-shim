@@ -2,9 +2,8 @@ module.exports = {
   desctipion: 'Cerebral shim for Ember.js',
   afterInstall: function () {
     return this.addPackagesToProject([
-      {name: 'cerebral', target: '^3.4.0'},
-      {name: 'broccoli-replace', target: '*'},
-      {name: 'download-git-repo', target: '^1.0.1'}
+      {name: 'cerebral', target: 'next'},
+      {name: 'broccoli-replace', target: '*'}
     ]).then(() => {
       return this.addAddonsToProject({
         packages: [
@@ -12,18 +11,6 @@ module.exports = {
           {name: 'ember-eventemitter3-shim', target: '*'}
         ]
       })
-    }).then(()=>{
-      return new Promise(function(resolve, reject){
-        const download = require('download-git-repo');
-        download('cerebral/cerebral', 'cerebral_src', function (err) {
-          console.log(err ? 'Error' : 'Success');
-          if (err) {
-            reject(err);
-          } else {
-            resolve();
-          }
-        })
-      });
     });
   },
 

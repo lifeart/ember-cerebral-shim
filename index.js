@@ -23,8 +23,7 @@ module.exports = {
   },
   treeForAddon (tree) {
     const app = this._findHost();
-    const repoPath = './cerebral_src/packages/node_modules/';
-    const reduxPath = path.dirname(path.resolve(repoPath + 'cerebral/src/index.js'));
+    const reduxPath = path.dirname(require.resolve('cerebral/es/index.js'));
     let reduxTree = new Funnel(reduxPath,{
       exclude: ['**/*.test.js']
     });
