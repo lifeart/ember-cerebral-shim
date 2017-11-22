@@ -2,7 +2,7 @@ module.exports = {
   desctipion: 'Cerebral shim for Ember.js',
   afterInstall: function () {
     return this.addPackagesToProject([
-      {name: 'cerebral', target: 'next'},
+      {name: 'cerebral', target: '3.6.0'},
       {name: 'broccoli-replace', target: '*'}
     ]).then(() => {
       return this.addAddonsToProject({

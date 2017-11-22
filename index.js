@@ -36,7 +36,7 @@ module.exports = {
         },
         {
           match: /VERSION/g,
-          replacement: `"3.4.0"`
+          replacement: `"3.6.0"`
         },
       ]
     });
